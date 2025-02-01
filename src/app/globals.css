@@ -1,3 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+html,
+body {
+  height: 100%;
+}
+.header-nav {
+  background-color: black;
+  color: white;
+  padding-top: 0.3rem;
+  font-family: "Tangerine", serif;
+  font-size: 2rem;
+}
+.two.column.row.header-nav {
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+}
+.logo {
+  width: 50px;
+  vertical-align: middle;
+}
+/* @import 'semantic-ui-css/semantic.min.css';
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -39,4 +63,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
+} */
