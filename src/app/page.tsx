@@ -1,5 +1,5 @@
 "use client";
-import { GridRow, GridColumn, Grid, Card, CardHeader, CardContent, Input, Button } from 'semantic-ui-react';
+import { GridRow, GridColumn, Grid, Card, CardHeader, CardContent, Input } from 'semantic-ui-react';
 
 export default function Home() {
   return (
