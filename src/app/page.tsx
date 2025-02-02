@@ -1,68 +1,46 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { WelcomeCard, RoomsList } from './Components/index';
+
 import {
   GridRow,
   GridColumn,
-  Grid,
-  Card,
-  CardHeader,
-  CardContent,
-  Input,
+  Grid
 } from "semantic-ui-react";
-import { GameBl } from "../app/BusinessLogic/GameBL";
+import { Sala } from "./Entities/Sala";
+import FakeBl from './BusinessLogic/FakeBl';
 
 export default function Home() {
-  const [test, setTest] = useState<string>("");
+  const [availableRooms, setAvailableRooms] = useState<Sala[]>([]);
+
+  useEffect(() => {
+    let availableRooms = FakeBl.getAvailableRooms();
+
+    setAvailableRooms(availableRooms);
+  }, [])
+
+  const createRoom = (roomName: string) => {
+    console.log('stanza creata :D ', roomName);
+    let newRoom: Sala = { Id: 1, NomeSala: roomName }
+    let updatedRooms = FakeBl.addRoom(newRoom);
+    setAvailableRooms([...updatedRooms]);
+  }
 
   return (
     <main>
       <Grid>
         <GridRow columns={1} className="main">
           <GridColumn textAlign="center">
-            <Card className="basic-card">
-              <CardHeader>
-                <p style={{ fontSize: "2rem" }}>Benvenuto!</p>
-              </CardHeader>
-              <CardContent>
-                <Input
-                  placeholder="Nome Sala"
-                  onChange={(ev) => setTest(ev.target.value)}
-                  size="big"
-                ></Input>
-              </CardContent>
-              <CardContent extra>
-                <button
-                  style={{ marginTop: "1rem", marginRight: 0 }}
-                  onClick={() => GameBl.creaSala(test)}
-                  className="ui button green big"
-                >
-                  Crea
-                </button>
-                {/* <p style={{fontSize: '1.5rem'}}>sale disponibili:</p> */}
-              </CardContent>
-            </Card>
+            <WelcomeCard createRoom={createRoom} />
           </GridColumn>
         </GridRow>
+
         <GridRow columns={1} className="main">
           <GridColumn textAlign="center">
-            <Card className="basic-card">
-              <CardHeader>
-                <p style={{ fontSize: "2rem" }}>sale disponibili:</p>
-              </CardHeader>
-              <CardContent>
-                <div role="list" className="ui divided relaxed list">
-                  <div role="listitem" className="item">
-                    <div className="content">
-                      <img src="/Personaggi/Belva.png" className="ui mini circular image aligned"/>
-                      <a className="header">Semantic-Org/Semantic-UI</a>
-                      <a className="description">Updated 10 mins ago</a>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <RoomsList roomsList={availableRooms} />
           </GridColumn>
         </GridRow>
+
       </Grid>
     </main>
   );
