@@ -7,7 +7,7 @@ export default class FakeBl {
     }
 
     public static addRoom(room:Sala):Sala[] {
-        let existingRooms:Sala[] = rooms;
+        const existingRooms:Sala[] = rooms;
         existingRooms.push(room);
 
         return existingRooms;

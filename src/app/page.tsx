@@ -14,15 +14,15 @@ export default function Home() {
   const [availableRooms, setAvailableRooms] = useState<Sala[]>([]);
 
   useEffect(() => {
-    let availableRooms = FakeBl.getAvailableRooms();
+    const availableRooms = FakeBl.getAvailableRooms();
 
     setAvailableRooms(availableRooms);
   }, [])
 
   const createRoom = (roomName: string) => {
     console.log('stanza creata :D ', roomName);
-    let newRoom: Sala = { Id: 1, NomeSala: roomName }
-    let updatedRooms = FakeBl.addRoom(newRoom);
+    const newRoom: Sala = { Id: 1, NomeSala: roomName }
+    const updatedRooms = FakeBl.addRoom(newRoom);
     setAvailableRooms([...updatedRooms]);
   }
 
