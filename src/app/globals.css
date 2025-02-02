@@ -37,6 +37,10 @@ main {
   width: 50px;
   vertical-align: middle;
 }
+
+.personaggi{
+  background-image: url('/Personaggi/Belva.png');
+}
 /* @import 'semantic-ui-css/semantic.min.css';
 
 
