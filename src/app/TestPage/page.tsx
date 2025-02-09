@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { fetchSalas, createSala, deleteSala } from "../BusinessLogic/SalaService";
 import { Sala } from "../Entities/Sala";
+import LoginForm from './LoginForm';
 
 const SalaPage = () => {
   const [salas, setSalas] = useState<Sala[]>([]);
@@ -41,6 +42,7 @@ const SalaPage = () => {
 
   return (
     <div>
+      <LoginForm />
       <h1>Salas</h1>
       <input
         type="text"

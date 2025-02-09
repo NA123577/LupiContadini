@@ -1,12 +1,12 @@
 
 export const fetchSalas = async () => {
-    const response = await fetch("/api/SupabaseFolder", { method: "GET" });
+    const response = await fetch("/api/SupabaseFolder/Sala", { method: "GET" });
     if (!response.ok) throw new Error("Error fetching Salas");
     return response.json();
   };
   
   export const createSala = async (nomeSala: string) => {
-    const response = await fetch("/api/SupabaseFolder", {
+    const response = await fetch("/api/SupabaseFolder/Sala", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nomeSala }),
@@ -17,7 +17,7 @@ export const fetchSalas = async () => {
   };
   
   export const updateSala = async (id: number, newNomeSala: string) => {
-    const response = await fetch("/api/SupabaseFolder", {
+    const response = await fetch("/api/SupabaseFolder/Sala", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, newNomeSala }),
@@ -28,7 +28,7 @@ export const fetchSalas = async () => {
   };
   
   export const deleteSala = async (id: number) => {
-    const response = await fetch("/api/SupabaseFolder", {
+    const response = await fetch("/api/SupabaseFolder/Sala", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
