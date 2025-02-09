@@ -13,6 +13,7 @@ body {
 }
 .ui.card.basic-card {
   margin: auto;
+  width: auto;
 }
 .three.column.row.main {
   padding-top: 2rem;
