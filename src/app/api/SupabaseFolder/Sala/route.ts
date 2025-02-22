@@ -3,7 +3,6 @@ import supabase from "../SupabaseClient";
 // Handling Sala CRUD operations
 // GET request handler for Sala (fetch all rooms)
 export async function GET() {
-  console.log("GET request received");
   return await GetSala();
 }
 
@@ -102,7 +101,7 @@ async function UpdateSala(request: Request) {
 async function DeleteSala(request: Request) {
   try {
     const { idSala } = await request.json();
-
+    
     // First delete Giocatori associated with the Sala
     const { error: deletePlayersError } = await supabase
       .from("Giocatore")
@@ -120,7 +119,7 @@ async function DeleteSala(request: Request) {
     const { data, error } = await supabase
       .from("Sala")
       .delete()
-      .eq("id", idSala);
+      .eq("Id", idSala);
 
     if (error) {
       return new Response("Error deleting Sala: " + error.message, {

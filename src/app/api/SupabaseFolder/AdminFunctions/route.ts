@@ -6,7 +6,6 @@ export async function DELETE() {
   try {
     // First delete all rows from Giocatori table
     const { error: deleteGiocatoriError } = await supabase.from("Giocatore").delete().neq("Id", 0);
-    console.log(deleteGiocatoriError);
     if (deleteGiocatoriError) {
       throw new Error("Failed to delete Giocatori: " + deleteGiocatoriError.message);
     }

@@ -11,7 +11,6 @@ export const fetchSalas = async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nomeSala }),
     });
-    console.log(response);
     if (!response.ok) throw new Error("Error creating Sala");
     return response.json();
   };
@@ -31,7 +30,7 @@ export const fetchSalas = async () => {
     const response = await fetch("/api/SupabaseFolder/Sala", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
+      body: JSON.stringify({ idSala : id }),
     });
   
     if (!response.ok) throw new Error("Error deleting Sala");
