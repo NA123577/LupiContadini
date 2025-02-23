@@ -23,17 +23,19 @@ const SalaPage = () => {
 
   const handleCreateSala = async () => {
     try {
-      const newSalaData = await createSala(newSala);
-      setSalas([...salas, newSalaData]); // Update UI
-      setNewSala("");
+      // // const newSalaData = await createSala(newSala);
+      // setSalas([...salas, newSalaData]); // Update UI
+      // setNewSala("");
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleDeleteSala = async (id: number) => {
+  const handleDeleteSala = async (id?: number) => {
     try {
-      await deleteSala(id);
+      if(id) {
+        await deleteSala(id);
+      }
       setSalas(salas.filter((sala) => sala.Id !== id));
     } catch (error) {
       console.error(error);

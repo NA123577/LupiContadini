@@ -1,4 +1,4 @@
-export const signIn = async (email: string, password: string) => {
+export const signIn = async (email: string, password?: string) => {
     const response = await fetch("/api/SupabaseFolder/auth/Login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

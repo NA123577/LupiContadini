@@ -50,27 +50,29 @@ async function GetSala() {
 // Insert a new Sala
 
 async function InsertSala(request: Request) {
-    try {
-      const body = await request.json();
-  
-      if (!body.nomeSala) {
-        return new Response("Missing nomeSala", { status: 400 });
-      }
-  
-      const { data, error } = await supabase.from("Sala").insert([{ NomeSala: body.nomeSala }]);
-  
-      if (error) {
-        console.error("Supabase error:", error);
-        return new Response("Error inserting Sala: " + error.message, { status: 500 });
-      }
-  
-      return new Response(JSON.stringify(data), { status: 201 });
-    } catch (err) {
-      console.error("Unexpected error:", err);
-      return new Response("Internal Server Error", { status: 500 });
+  try {
+    const body = await request.json();
+
+    if (!body.nomeSala) {
+      return new Response("Missing nomeSala", { status: 400 });
     }
+
+    console.log(body);
+    // const { data, error } = await supabase.from("Sala").insert([{ NomeSala: body.nomeSala }]);
+    const { data, error } = await supabase.rpc("insertsala", {  _idgiocatore: body.currentUserId, _nomesala: body.nomeSala });
+
+    if (error) {
+      console.error("Supabase error:", error);
+      return new Response("Error inserting Sala: " + error.message, { status: 500 });
+    }
+
+    return new Response(JSON.stringify(data), { status: 201 });
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    return new Response("Internal Server Error", { status: 500 });
   }
-  
+}
+
 
 // Update an existing Sala
 async function UpdateSala(request: Request) {
@@ -90,10 +92,10 @@ async function UpdateSala(request: Request) {
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (err) {
     if (err instanceof Error) {
-        return new Response("Error updating Sala: " + err.message, { status: 500 });
-      }
-      return new Response('Unknown error occurred while updating Sala', { status: 500 });
-    
+      return new Response("Error updating Sala: " + err.message, { status: 500 });
+    }
+    return new Response('Unknown error occurred while updating Sala', { status: 500 });
+
   }
 }
 
@@ -101,7 +103,6 @@ async function UpdateSala(request: Request) {
 async function DeleteSala(request: Request) {
   try {
     const { idSala } = await request.json();
-    
     // First delete Giocatori associated with the Sala
     const { error: deletePlayersError } = await supabase
       .from("Giocatore")
@@ -114,13 +115,14 @@ async function DeleteSala(request: Request) {
         { status: 500 }
       );
     }
-
+    console.log(idSala);
     // Now delete the Sala itself
     const { data, error } = await supabase
       .from("Sala")
       .delete()
       .eq("Id", idSala);
 
+    console.log(data);
     if (error) {
       return new Response("Error deleting Sala: " + error.message, {
         status: 500,
@@ -130,10 +132,10 @@ async function DeleteSala(request: Request) {
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (err) {
     if (err instanceof Error) {
-        return new Response("Error deleting Sala: " + err.message, { status: 500 });
-      }
-      return new Response('Unknown error occurred while deleting Sala', { status: 500 });
-    
+      return new Response("Error deleting Sala: " + err.message, { status: 500 });
+    }
+    return new Response('Unknown error occurred while deleting Sala', { status: 500 });
+
   }
 }
 

@@ -1,15 +1,16 @@
+import { Sala } from "../Entities/Sala";
 
-export const fetchSalas = async () => {
+export const fetchSalas = async ():Promise<Sala[]> => {
     const response = await fetch("/api/SupabaseFolder/Sala", { method: "GET" });
     if (!response.ok) throw new Error("Error fetching Salas");
     return response.json();
   };
   
-  export const createSala = async (nomeSala: string) => {
+  export const createSala = async (nomeSala: string, currentUserId:number) => {
     const response = await fetch("/api/SupabaseFolder/Sala", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nomeSala }),
+      body: JSON.stringify({ nomeSala, currentUserId }),
     });
     if (!response.ok) throw new Error("Error creating Sala");
     return response.json();
@@ -26,7 +27,8 @@ export const fetchSalas = async () => {
     return response.json();
   };
   
-  export const deleteSala = async (id: number) => {
+  export const deleteSala = async (id:number) => {
+    console.log(id + '- salaService');
     const response = await fetch("/api/SupabaseFolder/Sala", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },

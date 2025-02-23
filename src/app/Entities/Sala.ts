@@ -1,4 +1,4 @@
 export interface Sala {
-    Id: number;
+    Id?: number;
     NomeSala: string;
   }

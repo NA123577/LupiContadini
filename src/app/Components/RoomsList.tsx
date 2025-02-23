@@ -4,9 +4,18 @@ import { Sala } from "../Entities/Sala";
 
 interface RoomsListProps {
     roomsList: Sala[];
+    setUserCurrentSala: (sala:Sala) => void;
+    deleteSala: (idSala?:number) => void;
 }
 
 export default function RoomsList(props: RoomsListProps) {
+    // const setUserCurrentSala = (sala:Sala) => {
+    //     props.setUserCurrentSala(sala);
+    // }
+
+    const deleteSala = (idSala?:number) => {
+        props.deleteSala(idSala)
+    }
     return (
         <Card className="basic-card">
             <CardHeader>
@@ -18,14 +27,14 @@ export default function RoomsList(props: RoomsListProps) {
                         {props.roomsList.map((room: Sala, index) => {
 
                             return (
-                                <div key={index} role="listitem" className="item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
+                                <div key={index} role="listitem" className="item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <img src="/Personaggi/Belva.png" className="ui avatar image" />
                                     <div className="content">
                                         <div className="header">
                                             {room.NomeSala}
                                         </div>
                                     </div>
-                                    <i style={{ marginLeft: 'auto' }} aria-hidden="true" className="trash alternate outline red icon large"></i>
+                                    <i style={{ marginLeft: 'auto' }} aria-hidden="true" onClick={() => deleteSala(room.Id)} className="trash alternate outline red icon large"></i>
                                 </div>
                             )
                         })}

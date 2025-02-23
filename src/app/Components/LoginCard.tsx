@@ -24,8 +24,8 @@ export default function LoginCard(props:LoginCardProps) {
                         <i aria-hidden="true" className="asterisk icon">
                         </i>
                     </div>
-                    <input type="text" placeholder="email..." onChange={(ev) => setEmail(ev.target.value)} />
-                    <i aria-hidden="true" className="at icon">
+                    <input type="text" placeholder="user name..." onChange={(ev) => setEmail(ev.target.value)} />
+                    <i aria-hidden="true" className="users icon">
                     </i>
                 </div>
                 {(email.toLowerCase() === Mappings.adminEmail) &&
@@ -42,7 +42,6 @@ export default function LoginCard(props:LoginCardProps) {
                 >
                     Entra
                 </button>
-                {/* <p style={{fontSize: '1.5rem'}}>sale disponibili:</p> */}
             </CardContent>
         </Card>
     )
